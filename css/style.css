@@ -44,11 +44,14 @@ body {
   padding: 14px 8px;
   background: none;
   border: none;
+  border-bottom: 3px solid transparent;
   color: #6b7280;
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
-  border-bottom: 3px solid transparent;
+  text-decoration: none;
+  text-align: center;
+  display: block;
   transition: all 0.2s;
 }
 
@@ -58,10 +61,14 @@ body {
 }
 
 /* ── CONTAINER ─────────────────────────────────────── */
-.container { max-width: 480px; margin: 0 auto; padding: 20px 16px; }
-
-.tab-content { display: none; flex-direction: column; gap: 16px; }
-.tab-content.active { display: flex; }
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
 /* ── CARDS ─────────────────────────────────────────── */
 .cards {
