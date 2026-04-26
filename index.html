@@ -13,55 +13,130 @@
     <span class="dolar" id="dolar-valor">Carregando dólar...</span>
   </header>
 
+  <!-- NAVEGAÇÃO ENTRE ABAS -->
+  <nav class="nav-tabs">
+    <button class="tab-btn active" data-tab="visao-geral">📊 Visão Geral</button>
+    <button class="tab-btn" data-tab="transacoes">💸 Transações</button>
+    <button class="tab-btn" data-tab="investimentos">📈 Investimentos</button>
+  </nav>
+
   <main class="container">
 
-    <!-- CARDS DE SALDO -->
-    <section class="cards">
-      <div class="card card-entradas">
-        <p>Entradas</p>
-        <h2 id="total-entradas">R$ 0,00</h2>
-      </div>
-      <div class="card card-saidas">
-        <p>Saídas</p>
-        <h2 id="total-saidas">R$ 0,00</h2>
-      </div>
-      <div class="card card-livre">
-        <p>Dinheiro Livre</p>
-        <h2 id="total-livre">R$ 0,00</h2>
-      </div>
-    </section>
+    <!-- ABA: VISÃO GERAL -->
+    <section id="tab-visao-geral" class="tab-content active">
 
-    <!-- FORMULÁRIO DE TRANSAÇÃO -->
-    <section class="form-section">
-      <h3>Nova Transação</h3>
-      <form id="form-transacao">
-        <input type="text" id="descricao" placeholder="Descrição (ex: Salário, Mercado...)" required />
-        <input type="number" id="valor" placeholder="Valor (ex: 1500)" step="0.01" required />
-        <select id="categoria">
-          <option value="Alimentação">🍔 Alimentação</option>
-          <option value="Transporte">🚗 Transporte</option>
-          <option value="Lazer">🎮 Lazer</option>
-          <option value="Saúde">💊 Saúde</option>
-          <option value="Salário">💼 Salário</option>
-          <option value="Freela">💻 Freela</option>
-          <option value="Outros">📦 Outros</option>
-        </select>
-        <div class="tipo-grupo">
-          <label>
-            <input type="radio" name="tipo" value="entrada" checked /> Entrada
-          </label>
-          <label>
-            <input type="radio" name="tipo" value="saida" /> Saída
-          </label>
+      <!-- CARDS DE SALDO -->
+      <div class="cards">
+        <div class="card card-entradas">
+          <p>Entradas</p>
+          <h2 id="total-entradas">R$ 0,00</h2>
         </div>
-        <button type="submit">Adicionar</button>
-      </form>
+        <div class="card card-saidas">
+          <p>Saídas</p>
+          <h2 id="total-saidas">R$ 0,00</h2>
+        </div>
+        <div class="card card-livre">
+          <p>Dinheiro Livre</p>
+          <h2 id="total-livre">R$ 0,00</h2>
+        </div>
+      </div>
+
+      <!-- TERMÔMETRO DE GASTOS -->
+      <div class="card-bloco">
+        <div class="bloco-header">
+          <span>🌡️ Limite de Gastos</span>
+          <span id="limite-restante-label">R$ 0,00 restantes</span>
+        </div>
+        <div class="termometro-barra">
+          <div class="termometro-fill" id="termometro-fill"></div>
+        </div>
+        <p class="termometro-info" id="termometro-info">Configure seu limite de gastos abaixo.</p>
+        <div class="limite-config">
+          <input type="number" id="input-limite" placeholder="Definir limite mensal (ex: 2000)" step="0.01" />
+          <button id="btn-salvar-limite">Salvar</button>
+        </div>
+      </div>
+
+      <!-- POTENCIAL DE INVESTIMENTO -->
+      <div class="card-bloco">
+        <div class="bloco-header">
+          <span>💡 Potencial de Investimento</span>
+        </div>
+        <div class="potencial-grid">
+          <div class="potencial-item">
+            <p>Conservador (10%)</p>
+            <h3 id="pot-10">R$ 0,00</h3>
+          </div>
+          <div class="potencial-item destaque">
+            <p>Moderado (20%)</p>
+            <h3 id="pot-20">R$ 0,00</h3>
+          </div>
+          <div class="potencial-item">
+            <p>Arrojado (30%)</p>
+            <h3 id="pot-30">R$ 0,00</h3>
+          </div>
+        </div>
+        <p class="potencial-info">Sugestão baseada no seu dinheiro livre atual.</p>
+      </div>
+
     </section>
 
-    <!-- LISTA DE TRANSAÇÕES -->
-    <section class="lista-section">
-      <h3>Transações</h3>
-      <ul id="lista-transacoes"></ul>
+    <!-- ABA: TRANSAÇÕES -->
+    <section id="tab-transacoes" class="tab-content">
+
+      <div class="form-section">
+        <h3>Nova Transação</h3>
+        <form id="form-transacao">
+          <input type="text" id="descricao" placeholder="Descrição (ex: Salário, Mercado...)" required />
+          <input type="number" id="valor" placeholder="Valor (ex: 1500)" step="0.01" required />
+          <select id="categoria">
+            <option value="Alimentação">🍔 Alimentação</option>
+            <option value="Transporte">🚗 Transporte</option>
+            <option value="Lazer">🎮 Lazer</option>
+            <option value="Saúde">💊 Saúde</option>
+            <option value="Salário">💼 Salário</option>
+            <option value="Freela">💻 Freela</option>
+            <option value="Outros">📦 Outros</option>
+          </select>
+          <div class="tipo-grupo">
+            <label><input type="radio" name="tipo" value="entrada" checked /> Entrada</label>
+            <label><input type="radio" name="tipo" value="saida" /> Saída</label>
+          </div>
+          <button type="submit">Adicionar</button>
+        </form>
+      </div>
+
+      <div class="lista-section">
+        <h3>Transações</h3>
+        <ul id="lista-transacoes"></ul>
+      </div>
+
+    </section>
+
+    <!-- ABA: INVESTIMENTOS -->
+    <section id="tab-investimentos" class="tab-content">
+
+      <!-- TOTAL INVESTIDO -->
+      <div class="card card-investido">
+        <p>Total Investido</p>
+        <h2 id="total-investido">R$ 0,00</h2>
+      </div>
+
+      <!-- CRIAR NOVA CARTEIRA -->
+      <div class="card-bloco">
+        <div class="bloco-header">
+          <span>➕ Nova Carteira</span>
+        </div>
+        <form id="form-carteira">
+          <input type="text" id="nome-carteira" placeholder="Nome (ex: Reserva de Emergência, Cripto...)" required />
+          <input type="text" id="icone-carteira" placeholder="Ícone (ex: 🔒, ₿, 📊)" maxlength="4" />
+          <button type="submit">Criar Carteira</button>
+        </form>
+      </div>
+
+      <!-- LISTA DE CARTEIRAS -->
+      <div id="lista-carteiras"></div>
+
     </section>
 
   </main>
