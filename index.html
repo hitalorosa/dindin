@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dindin 💰</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="header">
+    <h1>💰 Dindin</h1>
+    <span class="dolar" id="dolar-valor">Carregando dólar...</span>
+  </header>
+
+  <main class="container">
+
+    <!-- CARDS DE SALDO -->
+    <section class="cards">
+      <div class="card card-entradas">
+        <p>Entradas</p>
+        <h2 id="total-entradas">R$ 0,00</h2>
+      </div>
+      <div class="card card-saidas">
+        <p>Saídas</p>
+        <h2 id="total-saidas">R$ 0,00</h2>
+      </div>
+      <div class="card card-livre">
+        <p>Dinheiro Livre</p>
+        <h2 id="total-livre">R$ 0,00</h2>
+      </div>
+    </section>
+
+    <!-- FORMULÁRIO DE TRANSAÇÃO -->
+    <section class="form-section">
+      <h3>Nova Transação</h3>
+      <form id="form-transacao">
+        <input type="text" id="descricao" placeholder="Descrição (ex: Salário, Mercado...)" required />
+        <input type="number" id="valor" placeholder="Valor (ex: 1500)" step="0.01" required />
+        <select id="categoria">
+          <option value="Alimentação">🍔 Alimentação</option>
+          <option value="Transporte">🚗 Transporte</option>
+          <option value="Lazer">🎮 Lazer</option>
+          <option value="Saúde">💊 Saúde</option>
+          <option value="Salário">💼 Salário</option>
+          <option value="Freela">💻 Freela</option>
+          <option value="Outros">📦 Outros</option>
+        </select>
+        <div class="tipo-grupo">
+          <label>
+            <input type="radio" name="tipo" value="entrada" checked /> Entrada
+          </label>
+          <label>
+            <input type="radio" name="tipo" value="saida" /> Saída
+          </label>
+        </div>
+        <button type="submit">Adicionar</button>
+      </form>
+    </section>
+
+    <!-- LISTA DE TRANSAÇÕES -->
+    <section class="lista-section">
+      <h3>Transações</h3>
+      <ul id="lista-transacoes"></ul>
+    </section>
+
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

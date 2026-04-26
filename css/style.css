@@ -1,0 +1,219 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f0f1a;
+  color: #e0e0e0;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+  background: #1a1a2e;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #7c3aed;
+}
+
+.header h1 {
+  font-size: 1.4rem;
+  color: #a78bfa;
+}
+
+.dolar {
+  font-size: 0.85rem;
+  background: #2d2d4e;
+  padding: 6px 12px;
+  border-radius: 20px;
+  color: #34d399;
+  font-weight: bold;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.card {
+  background: #1a1a2e;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  border: 1px solid #2d2d4e;
+}
+
+.card p {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.card h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.card-entradas h2 { color: #34d399; }
+.card-saidas h2   { color: #f87171; }
+
+.card-livre {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #1e1b4b, #2e1065);
+  border-color: #7c3aed;
+}
+
+.card-livre h2 {
+  font-size: 1.6rem;
+  color: #a78bfa;
+}
+
+/* FORMULÁRIO */
+.form-section, .lista-section {
+  background: #1a1a2e;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #2d2d4e;
+}
+
+.form-section h3, .lista-section h3 {
+  font-size: 0.95rem;
+  color: #a78bfa;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+input, select {
+  background: #0f0f1a;
+  border: 1px solid #3d3d6e;
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: #e0e0e0;
+  font-size: 0.95rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: #7c3aed;
+}
+
+.tipo-grupo {
+  display: flex;
+  gap: 24px;
+}
+
+.tipo-grupo label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+button[type="submit"] {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button[type="submit"]:hover {
+  background: #6d28d9;
+}
+
+/* LISTA */
+#lista-transacoes {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.transacao-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0f0f1a;
+  border-radius: 8px;
+  padding: 12px 14px;
+  border-left: 4px solid;
+}
+
+.transacao-item.entrada { border-color: #34d399; }
+.transacao-item.saida   { border-color: #f87171; }
+
+.transacao-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.transacao-desc {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.transacao-cat {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.transacao-valor {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.transacao-item.entrada .transacao-valor { color: #34d399; }
+.transacao-item.saida   .transacao-valor { color: #f87171; }
+
+.btn-remover {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 12px;
+  transition: color 0.2s;
+}
+
+.btn-remover:hover { color: #f87171; }
+
+.vazio {
+  text-align: center;
+  color: #4b5563;
+  font-size: 0.9rem;
+  padding: 20px 0;
+}
