@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dindin 💰 — Investimentos</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="header">
+    <h1>💰 Dindin</h1>
+    <span class="dolar" id="dolar-valor">Carregando...</span>
+  </header>
+
+  <nav class="nav-tabs">
+    <a href="index.html" class="tab-btn">📊 Visão Geral</a>
+    <a href="transacoes.html" class="tab-btn">💸 Transações</a>
+    <a href="investimentos.html" class="tab-btn active">📈 Investimentos</a>
+  </nav>
+
+  <main class="container">
+
+    <div class="card card-investido">
+      <p>Total Investido</p>
+      <h2 id="total-investido">R$ 0,00</h2>
+    </div>
+
+    <div class="card-bloco">
+      <div class="bloco-header">
+        <span>➕ Nova Carteira</span>
+      </div>
+      <form id="form-carteira">
+        <input type="text" id="nome-carteira" placeholder="Nome (ex: Reserva de Emergência, Cripto...)" required />
+        <input type="text" id="icone-carteira" placeholder="Ícone (ex: 🔒 ₿ 📊)" maxlength="4" />
+        <button type="submit">Criar Carteira</button>
+      </form>
+    </div>
+
+    <div id="lista-carteiras"></div>
+
+  </main>
+
+  <script src="js/app.js"></script>
+  <script src="js/investimentos.js"></script>
+</body>
+</html>

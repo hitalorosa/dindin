@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dindin 💰 — Transações</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="header">
+    <h1>💰 Dindin</h1>
+    <span class="dolar" id="dolar-valor">Carregando...</span>
+  </header>
+
+  <nav class="nav-tabs">
+    <a href="index.html" class="tab-btn">📊 Visão Geral</a>
+    <a href="transacoes.html" class="tab-btn active">💸 Transações</a>
+    <a href="investimentos.html" class="tab-btn">📈 Investimentos</a>
+  </nav>
+
+  <main class="container">
+
+    <div class="form-section">
+      <h3>Nova Transação</h3>
+      <form id="form-transacao">
+        <input type="text" id="descricao" placeholder="Descrição (ex: Salário, Mercado...)" required />
+        <input type="number" id="valor" placeholder="Valor (ex: 1500)" step="0.01" required />
+        <select id="categoria">
+          <option value="Alimentação">🍔 Alimentação</option>
+          <option value="Transporte">🚗 Transporte</option>
+          <option value="Lazer">🎮 Lazer</option>
+          <option value="Saúde">💊 Saúde</option>
+          <option value="Salário">💼 Salário</option>
+          <option value="Freela">💻 Freela</option>
+          <option value="Outros">📦 Outros</option>
+        </select>
+        <div class="tipo-grupo">
+          <label><input type="radio" name="tipo" value="entrada" checked /> Entrada</label>
+          <label><input type="radio" name="tipo" value="saida" /> Saída</label>
+        </div>
+        <button type="submit">Adicionar</button>
+      </form>
+    </div>
+
+    <div class="lista-section">
+      <h3>Histórico</h3>
+      <ul id="lista-transacoes"></ul>
+    </div>
+
+  </main>
+
+  <script src="js/app.js"></script>
+  <script src="js/transacoes.js"></script>
+</body>
+</html>
