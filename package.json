@@ -1,0 +1,8 @@
+{
+  "name": "dindin",
+  "version": "1.0.0",
+  "description": "App de controle financeiro pessoal",
+  "scripts": {
+    "dev": "npx serve . -p 3000"
+  }
+}
