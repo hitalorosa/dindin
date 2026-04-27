@@ -454,3 +454,217 @@ button[type="submit"]:hover { background: #6d28d9; }
   font-size: 0.9rem;
   padding: 20px 0;
 }
+
+/* ── MODAL DE SALÁRIO ───────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 20px;
+}
+
+.modal-box {
+  background: #1a1a2e;
+  border: 1px solid #7c3aed;
+  border-radius: 16px;
+  padding: 32px 24px;
+  text-align: center;
+  max-width: 340px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-icone { font-size: 3rem; }
+
+.modal-titulo {
+  font-size: 1.3rem;
+  color: #a78bfa;
+}
+
+.modal-texto {
+  font-size: 0.95rem;
+  color: #d1d5db;
+  line-height: 1.5;
+}
+
+.modal-texto strong { color: #34d399; }
+
+.modal-botoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.modal-btn-sim {
+  background: #065f46;
+  color: #34d399;
+  border: 1px solid #34d399;
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal-btn-sim:hover { background: #047857; }
+
+.modal-btn-nao {
+  background: none;
+  color: #6b7280;
+  border: 1px solid #374151;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.modal-btn-nao:hover { color: #9ca3af; border-color: #6b7280; }
+
+/* ── CALENDÁRIO ─────────────────────────────────────── */
+.cal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.cal-titulo {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #a78bfa;
+}
+
+.cal-nav {
+  background: none;
+  border: none;
+  color: #a78bfa;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.cal-nav:hover { background: #2d2d4e; }
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+}
+
+.cal-dow {
+  font-size: 0.65rem;
+  color: #6b7280;
+  font-weight: 600;
+  padding: 4px 0;
+}
+
+.cal-dia {
+  position: relative;
+  font-size: 0.8rem;
+  padding: 6px 2px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #9ca3af;
+  transition: background 0.15s;
+  line-height: 1;
+}
+
+.cal-dia:hover { background: #2d2d4e; color: #e0e0e0; }
+
+.cal-dia.hoje {
+  background: #2d2d4e;
+  color: #a78bfa;
+  font-weight: 700;
+}
+
+.cal-dia.tem-gasto { color: #e0e0e0; }
+
+.cal-dia.tem-gasto i {
+  display: block;
+  width: 4px;
+  height: 4px;
+  background: #7c3aed;
+  border-radius: 50%;
+  margin: 2px auto 0;
+}
+
+.cal-dia.ativo {
+  background: #7c3aed !important;
+  color: #fff !important;
+  font-weight: 700;
+}
+
+.cal-limpar {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  background: none;
+  border: 1px dashed #374151;
+  border-radius: 8px;
+  padding: 8px;
+  color: #6b7280;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cal-limpar:hover { border-color: #f87171; color: #f87171; }
+
+/* ── SALÁRIO ─────────────────────────────────────────── */
+.sal-config-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sal-label {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sal-dias { display: flex; gap: 8px; }
+
+.sal-dia-badge {
+  background: #2d2d4e;
+  border: 1px solid #7c3aed;
+  color: #a78bfa;
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.sal-proximo {
+  font-size: 0.95rem;
+  color: #34d399;
+  font-weight: 600;
+}
+
+.btn-registrar-manual {
+  background: #1e1b4b;
+  border: 1px dashed #7c3aed;
+  border-radius: 10px;
+  color: #a78bfa;
+  padding: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.btn-registrar-manual:hover { background: #2e2470; }

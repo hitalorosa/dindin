@@ -14,19 +14,26 @@
   </header>
 
   <nav class="nav-tabs">
-    <a href="index.html" class="tab-btn">📊 Visão Geral</a>
-    <a href="transacoes.html" class="tab-btn active">💸 Transações</a>
+    <a href="index.html"        class="tab-btn">📊 Visão</a>
+    <a href="transacoes.html"   class="tab-btn active">💸 Transações</a>
     <a href="gastos-fixos.html" class="tab-btn">📋 Fixos</a>
-    <a href="investimentos.html" class="tab-btn">📈 Investimentos</a>
+    <a href="salario.html"      class="tab-btn">💼 Salário</a>
+    <a href="investimentos.html" class="tab-btn">📈 Invest.</a>
   </nav>
 
   <main class="container">
 
+    <!-- MINI CALENDÁRIO -->
+    <div class="card-bloco">
+      <div id="calendario"></div>
+    </div>
+
+    <!-- FORMULÁRIO -->
     <div class="form-section">
       <h3>Nova Transação</h3>
       <form id="form-transacao">
-        <input type="text" id="descricao" placeholder="Descrição (ex: Salário, Mercado...)" required />
-        <input type="number" id="valor" placeholder="Valor (ex: 1500)" step="0.01" required />
+        <input type="text" id="descricao" placeholder="Descrição (ex: Mercado, Uber...)" required />
+        <input type="number" id="valor" placeholder="Valor (ex: 150)" step="0.01" required />
         <select id="categoria">
           <option value="Alimentação">🍔 Alimentação</option>
           <option value="Transporte">🚗 Transporte</option>
@@ -44,8 +51,9 @@
       </form>
     </div>
 
+    <!-- LISTA -->
     <div class="lista-section">
-      <h3>Histórico</h3>
+      <h3 id="lista-titulo">Todas as Transações</h3>
       <ul id="lista-transacoes"></ul>
     </div>
 
