@@ -361,6 +361,92 @@ button[type="submit"]:hover { background: #6d28d9; }
 .btn-depositar { background: #065f46; color: #34d399; }
 .btn-retirar   { background: #7f1d1d; color: #f87171; }
 
+/* ── GASTOS FIXOS ───────────────────────────────────── */
+#lista-fixos {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fixo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #0f0f1a;
+  border: 1px solid #2d2d4e;
+  border-radius: 10px;
+  padding: 12px 14px;
+  transition: opacity 0.2s;
+}
+
+.fixo-item.pago {
+  opacity: 0.5;
+  border-color: #34d399;
+}
+
+.btn-check {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  line-height: 1;
+  padding: 0;
+}
+
+.fixo-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.fixo-nome {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.fixo-item.pago .fixo-nome {
+  text-decoration: line-through;
+  color: #6b7280;
+}
+
+.fixo-cat {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.fixo-valor {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #a78bfa;
+  white-space: nowrap;
+}
+
+.fixo-item.pago .fixo-valor {
+  color: #34d399;
+}
+
+.fixos-acoes-topo {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-reset {
+  background: #1e1b4b;
+  color: #a78bfa;
+  border: 1px solid #7c3aed;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-reset:hover { background: #2e2470; }
+
 /* ── VAZIO ──────────────────────────────────────────── */
 .vazio {
   text-align: center;
