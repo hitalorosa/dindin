@@ -8,10 +8,15 @@ let salarioConfig = JSON.parse(localStorage.getItem('dindin_salario'))   || {
   dias: [5, 20],
   historico: []
 };
+let cartaoConfig = JSON.parse(localStorage.getItem('dindin_cartao')) || {
+  limite: 0,
+  compras: []
+};
 
 function salvarTransacoes()  { localStorage.setItem('dindin_transacoes', JSON.stringify(transacoes)); }
 function salvarCarteiras()   { localStorage.setItem('dindin_carteiras',  JSON.stringify(carteiras));  }
 function salvarLimite(v)     { localStorage.setItem('dindin_limite', String(v)); }
+function salvarCartao()      { localStorage.setItem('dindin_cartao', JSON.stringify(cartaoConfig)); }
 function salvarSalario()     { localStorage.setItem('dindin_salario', JSON.stringify(salarioConfig)); }
 
 // ── UTILITÁRIOS ──────────────────────────────────────

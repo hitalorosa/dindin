@@ -787,6 +787,271 @@ button[type="submit"]:active { transform: scale(0.98); }
 
 .btn-registrar-manual:hover { background: rgba(124,58,237,0.15); }
 
+/* ── CARTÃO DE CRÉDITO ───────────────────────────────── */
+.cartao-visual {
+  background: linear-gradient(135deg, #1a0a3e 0%, #0d1a3e 50%, #0a0f2e 100%);
+  border: 1px solid rgba(124,58,237,0.5);
+  border-radius: 24px;
+  padding: 24px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(124,58,237,0.2);
+}
+
+.cartao-visual::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168,85,247,0.2), transparent 70%);
+}
+
+.cartao-visual::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: -40px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,130,246,0.15), transparent 70%);
+}
+
+.cartao-chip { font-size: 2rem; }
+
+.cartao-topo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cartao-label {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.cartao-limite-valor {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.cartao-meio {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.cartao-fatura-valor {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--red);
+}
+
+.cartao-disponivel-valor {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.cartao-barra-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.cartao-barra-bg {
+  background: rgba(255,255,255,0.1);
+  border-radius: var(--radius-pill);
+  height: 8px;
+  overflow: hidden;
+}
+
+.cartao-barra-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--green), #34d399);
+  transition: width 0.5s ease, background 0.4s ease;
+}
+
+.cartao-pct {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.45);
+  font-weight: 600;
+  text-align: right;
+}
+
+/* Parcelas selector */
+.parcelas-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.parcelas-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.parcela-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  color: var(--text2);
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.parcela-btn:hover { border-color: var(--purple); color: var(--purple2); }
+
+.parcela-btn.active {
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(124,58,237,0.4);
+}
+
+/* Preview da compra */
+.compra-preview {
+  background: rgba(124,58,237,0.08);
+  border: 1px solid rgba(124,58,237,0.25);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--purple2);
+  text-align: center;
+}
+
+/* Header da fatura */
+.fatura-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.fatura-header h3 {
+  font-size: 0.75rem;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.fatura-total-label {
+  font-size: 0.8rem;
+  color: var(--red);
+  font-weight: 600;
+}
+
+.fatura-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Items da fatura */
+#lista-fatura {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fatura-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface2);
+  border-radius: var(--radius-sm);
+  padding: 13px 14px;
+  border-left: 3px solid var(--purple);
+}
+
+.fatura-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.fatura-nome-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fatura-nome {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.badge-parcela {
+  background: rgba(124,58,237,0.15);
+  border: 1px solid rgba(124,58,237,0.3);
+  color: var(--purple2);
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.badge-parcela.avista {
+  background: rgba(16,185,129,0.1);
+  border-color: rgba(16,185,129,0.3);
+  color: var(--green);
+}
+
+.fatura-data {
+  font-size: 0.7rem;
+  color: var(--text3);
+  font-weight: 500;
+}
+
+.fatura-valores {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.fatura-parcela-valor {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--red);
+  white-space: nowrap;
+}
+
+.fatura-total-item {
+  font-size: 0.68rem;
+  color: var(--text3);
+  white-space: nowrap;
+}
+
 /* ── VAZIO ───────────────────────────────────────────── */
 .vazio {
   text-align: center;
