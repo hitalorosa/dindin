@@ -178,7 +178,6 @@ document.getElementById('form-compra').addEventListener('submit', function (e) {
 
   // 3. Se for gasto fixo, também adiciona aos Fixos
   if (ehFixo) {
-    let gastosFixos = JSON.parse(localStorage.getItem('dindin_fixos')) || [];
     gastosFixos.push({
       id: id + 1,
       nome: `💳 ${nome}`,

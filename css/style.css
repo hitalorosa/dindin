@@ -1136,3 +1136,204 @@ button[type="submit"]:active { transform: scale(0.98); }
   padding: 24px 0;
   font-weight: 500;
 }
+
+/* ── LISTA DE DESEJOS ────────────────────────────────── */
+.link-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.link-input-row input { flex: 1; }
+
+.link-input-row button {
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 12px 18px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+.link-input-row button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Preview do produto */
+#produto-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.preview-card {
+  display: flex;
+  gap: 14px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  align-items: flex-start;
+}
+
+#preview-img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+  background: var(--surface);
+}
+
+.preview-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+#preview-titulo {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+#preview-preco {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--green);
+}
+
+#preco-manual-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#btn-adicionar-desejo {
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 14px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(124,58,237,0.35);
+  transition: opacity 0.2s;
+}
+
+#btn-adicionar-desejo:hover { opacity: 0.9; }
+
+/* Grid de cards */
+#grid-desejos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.desejo-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.desejo-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(124,58,237,0.2);
+}
+
+.desejo-excluir {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(7,7,26,0.75);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(239,68,68,0.3);
+  color: var(--red);
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: background 0.2s;
+}
+
+.desejo-excluir:hover { background: rgba(239,68,68,0.3); }
+
+.desejo-img-link { display: block; }
+
+.desejo-img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+}
+
+.desejo-sem-img {
+  width: 100%;
+  height: 140px;
+  background: var(--surface2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+}
+
+.desejo-info {
+  padding: 10px 12px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.desejo-titulo {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.desejo-preco {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--yellow);
+}
+
+.desejo-btn-comprar {
+  display: block;
+  margin: 8px 10px 10px;
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  border-radius: var(--radius-pill);
+  padding: 9px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  transition: opacity 0.2s;
+}
+
+.desejo-btn-comprar:hover { opacity: 0.88; }

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dindin 💰 — Lista de Desejos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="header">
+    <h1>💰 Dindin</h1>
+    <span class="dolar" id="dolar-valor">Carregando...</span>
+  </header>
+
+  <nav class="nav-tabs">
+    <a href="index.html"         class="tab-btn">📊 Visão</a>
+    <a href="transacoes.html"    class="tab-btn">💸 Trans.</a>
+    <a href="gastos-fixos.html"  class="tab-btn">📋 Fixos</a>
+    <a href="salario.html"       class="tab-btn">💼 Salário</a>
+    <a href="cartao.html"        class="tab-btn">💳 Cartão</a>
+    <a href="investimentos.html" class="tab-btn">📈 Invest.</a>
+    <a href="desejos.html"       class="tab-btn active">✨ Desejos</a>
+  </nav>
+
+  <main class="container">
+
+    <!-- RESUMO -->
+    <div class="cards">
+      <div class="card">
+        <p>Itens na lista</p>
+        <h2 id="desejo-qtd" style="color:var(--purple2);">0</h2>
+      </div>
+      <div class="card">
+        <p>Total da lista</p>
+        <h2 id="desejo-total" style="color:var(--yellow);">R$ 0,00</h2>
+      </div>
+    </div>
+
+    <!-- BUSCA DE LINK -->
+    <div class="card-bloco">
+      <div class="bloco-header">
+        <span>🔗 Analisar Link</span>
+        <span id="link-status" style="font-size:0.72rem;"></span>
+      </div>
+      <div class="link-input-row">
+        <input type="url" id="input-url" placeholder="Cole o link do produto aqui..." />
+        <button id="btn-analisar">Analisar</button>
+      </div>
+
+      <!-- PREVIEW DO PRODUTO -->
+      <div id="produto-preview" style="display:none;">
+        <div class="preview-card">
+          <img id="preview-img" src="" alt="" />
+          <div class="preview-info">
+            <p id="preview-titulo"></p>
+            <div id="preco-wrap">
+              <span id="preview-preco"></span>
+              <div id="preco-manual-wrap" style="display:none;">
+                <label style="font-size:0.72rem; color:var(--text3);">Preço não encontrado — insira manualmente:</label>
+                <input type="number" id="input-preco-manual" placeholder="Ex: 299,90" step="0.01" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <button id="btn-adicionar-desejo">+ Salvar na Lista de Desejos</button>
+      </div>
+    </div>
+
+    <!-- GRID DE PRODUTOS -->
+    <div id="grid-desejos"></div>
+
+  </main>
+
+  <script src="js/app.js"></script>
+  <script src="js/desejos.js"></script>
+</body>
+</html>
