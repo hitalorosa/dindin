@@ -147,21 +147,50 @@ document.getElementById('compra-data').value = new Date().toISOString().split('T
 // ── FORMULÁRIO ───────────────────────────────────────
 document.getElementById('form-compra').addEventListener('submit', function (e) {
   e.preventDefault();
-  const nome    = document.getElementById('compra-nome').value.trim();
-  const valor   = parseFloat(document.getElementById('compra-valor').value);
-  const data    = document.getElementById('compra-data').value;
+  const nome      = document.getElementById('compra-nome').value.trim();
+  const valor     = parseFloat(document.getElementById('compra-valor').value);
+  const data      = document.getElementById('compra-data').value;
+  const ehFixo    = document.getElementById('compra-fixo').checked;
+  const valorParc = valor / parcelasSelecionadas;
 
   if (!nome || isNaN(valor) || valor <= 0 || !data) return;
 
-  cartaoConfig.compras.push({
-    id: Date.now(),
-    nome,
-    valor,
-    data,
-    parcelas: parcelasSelecionadas
-  });
+  const id = Date.now();
 
+  // 1. Adiciona ao cartão
+  cartaoConfig.compras.push({ id, nome, valor, data, parcelas: parcelasSelecionadas, fixo: ehFixo });
   salvarCartao();
+
+  // 2. Reflete na aba Transações (valor da parcela mensal como saída)
+  const descricaoTransacao = parcelasSelecionadas > 1
+    ? `💳 ${nome} (1/${parcelasSelecionadas})`
+    : `💳 ${nome}`;
+
+  transacoes.push({
+    descricao: descricaoTransacao,
+    valor: valorParc,
+    categoria: 'Cartão de Crédito',
+    tipo: 'saida',
+    data: new Date(data + 'T12:00:00').toISOString(),
+    cartaoId: id
+  });
+  salvarTransacoes();
+
+  // 3. Se for gasto fixo, também adiciona aos Fixos
+  if (ehFixo) {
+    let gastosFixos = JSON.parse(localStorage.getItem('dindin_fixos')) || [];
+    gastosFixos.push({
+      id: id + 1,
+      nome: `💳 ${nome}`,
+      valor: valorParc,
+      icone: '💳',
+      categoria: 'Cartão de Crédito',
+      pago: false,
+      cartaoId: id
+    });
+    localStorage.setItem('dindin_fixos', JSON.stringify(gastosFixos));
+  }
+
   atualizarPainel();
   renderizarFatura();
   this.reset();

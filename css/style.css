@@ -92,7 +92,7 @@ body {
   background: none;
   border: none;
   border-radius: var(--radius-pill);
-  color: var(--text3);
+  color: rgba(255,255,255,0.45);
   font-size: 0.72rem;
   font-weight: 600;
   cursor: pointer;
@@ -786,6 +786,82 @@ button[type="submit"]:active { transform: scale(0.98); }
 }
 
 .btn-registrar-manual:hover { background: rgba(124,58,237,0.15); }
+
+/* ── TOGGLE GASTO FIXO (cartão) ─────────────────────── */
+.toggle-fixo-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.toggle-fixo-label:has(input:checked) {
+  border-color: rgba(124,58,237,0.5);
+  background: rgba(124,58,237,0.08);
+}
+
+.toggle-fixo-wrap {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.toggle-fixo-wrap input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.toggle-fixo-slider {
+  position: absolute;
+  inset: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  transition: background 0.2s;
+}
+
+.toggle-fixo-slider::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--text3);
+  top: 3px;
+  left: 3px;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.toggle-fixo-wrap input:checked + .toggle-fixo-slider {
+  background: rgba(124,58,237,0.3);
+  border-color: var(--purple);
+}
+
+.toggle-fixo-wrap input:checked + .toggle-fixo-slider::before {
+  transform: translateX(18px);
+  background: var(--purple2);
+}
+
+.toggle-fixo-info { display: flex; flex-direction: column; gap: 2px; }
+
+.toggle-fixo-titulo {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.toggle-fixo-sub {
+  font-size: 0.72rem;
+  color: var(--text3);
+}
 
 /* ── CARTÃO DE CRÉDITO ───────────────────────────────── */
 .cartao-visual {
