@@ -1,5 +1,4 @@
-let gastosFixos = JSON.parse(localStorage.getItem('dindin_fixos')) || [];
-
+// gastosFixos já declarado globalmente em app.js
 function salvarFixos() {
   localStorage.setItem('dindin_fixos', JSON.stringify(gastosFixos));
 }
