@@ -1,7 +1,7 @@
 {
-  "name": "dindin",
+  "name": "planejador",
   "version": "1.0.0",
-  "description": "App de controle financeiro pessoal",
+  "description": "Planejamento financeiro mensal — simples, local e instalável (PWA)",
   "scripts": {
     "dev": "node dev-server.js"
   }

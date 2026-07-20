@@ -1,89 +1,198 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dindin 💰 — Visão Geral</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#4f46e5">
+  <title>Planejador — Meu mês financeiro</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <header class="header">
-    <h1>💰 Dindin</h1>
-    <span class="dolar" id="dolar-valor">Carregando...</span>
-  </header>
+  <!-- ===== Barra do topo ===== -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-dot">💰</span>
+      <span class="brand-name">Planejador</span>
+    </div>
 
-  <nav class="nav-tabs">
-    <a href="index.html"         class="tab-btn active">📊 Visão</a>
-    <a href="transacoes.html"    class="tab-btn">💸 Trans.</a>
-    <a href="gastos-fixos.html"  class="tab-btn">📋 Fixos</a>
-    <a href="salario.html"       class="tab-btn">💼 Salário</a>
-    <a href="cartao.html"        class="tab-btn">💳 Cartão</a>
-    <a href="investimentos.html" class="tab-btn">📈 Invest.</a>
-    <a href="desejos.html"       class="tab-btn">✨ Desejos</a>
-  </nav>
+    <div class="month-nav">
+      <button class="icon-btn" id="prev-month" aria-label="Mês anterior">‹</button>
+      <button class="month-label" id="month-label">—</button>
+      <button class="icon-btn" id="next-month" aria-label="Próximo mês">›</button>
+    </div>
+
+    <div class="topbar-actions">
+      <button class="icon-btn" id="btn-hoje" aria-label="Mês atual" title="Voltar pro mês atual">⌂</button>
+      <button class="icon-btn" id="btn-theme" aria-label="Tema">🌙</button>
+      <button class="icon-btn" id="btn-menu" aria-label="Menu">☰</button>
+    </div>
+  </header>
 
   <main class="container">
 
-    <!-- CARDS DE SALDO -->
-    <div class="cards">
-      <div class="card card-entradas">
-        <p>Entradas</p>
-        <h2 id="total-entradas">R$ 0,00</h2>
-      </div>
-      <div class="card card-saidas">
-        <p>Saídas</p>
-        <h2 id="total-saidas">R$ 0,00</h2>
-      </div>
-      <div class="card card-livre">
-        <p>Dinheiro Livre</p>
-        <h2 id="total-livre">R$ 0,00</h2>
-      </div>
-    </div>
+    <!-- ===== Resumo do mês ===== -->
+    <section class="hero card">
+      <div class="hero-label">Saldo projetado do mês</div>
+      <div class="hero-value" id="saldo-projetado">R$ 0,00</div>
+      <div class="hero-sub" id="saldo-sub">Adicione suas entradas e saídas ✨</div>
 
-    <!-- TERMÔMETRO DE GASTOS -->
-    <div class="card-bloco">
-      <div class="bloco-header">
-        <span>🌡️ Limite de Gastos</span>
-        <span id="limite-restante-label">—</span>
-      </div>
-      <div class="termometro-barra">
-        <div class="termometro-fill" id="termometro-fill"></div>
-      </div>
-      <p class="termometro-info" id="termometro-info">Configure seu limite abaixo.</p>
-      <div class="limite-config">
-        <input type="number" id="input-limite" placeholder="Limite mensal (ex: 2000)" step="0.01" />
-        <button id="btn-salvar-limite">Salvar</button>
-      </div>
-    </div>
-
-    <!-- POTENCIAL DE INVESTIMENTO -->
-    <div class="card-bloco">
-      <div class="bloco-header">
-        <span>💡 Potencial de Investimento</span>
-      </div>
-      <div class="potencial-grid">
-        <div class="potencial-item">
-          <p>Conservador (10%)</p>
-          <h3 id="pot-10">R$ 0,00</h3>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-dot in"></span>
+          <div>
+            <div class="stat-label">A receber</div>
+            <div class="stat-value" id="stat-receber">R$ 0,00</div>
+          </div>
         </div>
-        <div class="potencial-item destaque">
-          <p>Moderado (20%)</p>
-          <h3 id="pot-20">R$ 0,00</h3>
-        </div>
-        <div class="potencial-item">
-          <p>Arrojado (30%)</p>
-          <h3 id="pot-30">R$ 0,00</h3>
+        <div class="stat">
+          <span class="stat-dot out"></span>
+          <div>
+            <div class="stat-label">A pagar</div>
+            <div class="stat-value" id="stat-pagar">R$ 0,00</div>
+          </div>
         </div>
       </div>
-      <p class="potencial-info">Sugestão baseada no seu dinheiro livre atual.</p>
-    </div>
 
+      <div class="progress">
+        <div class="progress-head">
+          <span>Já realizado neste mês</span>
+          <span id="realizado-pct">0%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        <div class="progress-foot" id="realizado-foot">Marque os itens conforme forem acontecendo.</div>
+      </div>
+    </section>
+
+    <!-- ===== Entradas ===== -->
+    <section class="group">
+      <div class="group-head">
+        <h2><span class="group-ico in">↓</span> Entradas</h2>
+        <span class="group-total in" id="total-entradas">R$ 0,00</span>
+      </div>
+      <div class="list" id="list-entradas"></div>
+    </section>
+
+    <!-- ===== Saídas ===== -->
+    <section class="group">
+      <div class="group-head">
+        <h2><span class="group-ico out">↑</span> Saídas</h2>
+        <span class="group-total out" id="total-saidas">R$ 0,00</span>
+      </div>
+      <div class="list" id="list-saidas"></div>
+    </section>
+
+    <div class="footer-hint">
+      Dados salvos só neste aparelho. Faça um backup pelo menu <strong>☰</strong> de vez em quando.
+    </div>
   </main>
 
+  <!-- ===== Botão adicionar ===== -->
+  <button class="fab" id="fab-add" aria-label="Adicionar lançamento">
+    <span class="fab-plus">+</span><span class="fab-text">Adicionar</span>
+  </button>
+
+  <!-- ===== Modal: novo/editar lançamento ===== -->
+  <div class="overlay" id="overlay-form" hidden>
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title" id="form-title">Novo lançamento</h3>
+
+      <div class="type-toggle">
+        <button type="button" class="type-opt is-active" data-type="entrada">📥 Entrada</button>
+        <button type="button" class="type-opt" data-type="saida">📤 Saída</button>
+      </div>
+
+      <label class="field">
+        <span class="field-label">Descrição</span>
+        <input type="text" id="f-descricao" placeholder="Ex.: Salário, Aluguel, Freela…" autocomplete="off">
+      </label>
+
+      <div class="field-row">
+        <label class="field">
+          <span class="field-label">Valor (R$)</span>
+          <input type="text" id="f-valor" inputmode="decimal" placeholder="0,00" autocomplete="off">
+        </label>
+        <label class="field field-dia">
+          <span class="field-label">Dia do mês</span>
+          <input type="number" id="f-dia" min="1" max="31" placeholder="—" autocomplete="off">
+        </label>
+      </div>
+
+      <label class="field">
+        <span class="field-label">Categoria <span class="field-opt">(opcional)</span></span>
+        <input type="text" id="f-categoria" list="categorias" placeholder="Ex.: Casa, Cartão, Assinatura…" autocomplete="off">
+        <datalist id="categorias">
+          <option value="Salário"></option>
+          <option value="Freela"></option>
+          <option value="Rendimento"></option>
+          <option value="Casa"></option>
+          <option value="Contas"></option>
+          <option value="Cartão"></option>
+          <option value="Mercado"></option>
+          <option value="Transporte"></option>
+          <option value="Assinatura"></option>
+          <option value="Lazer"></option>
+          <option value="Saúde"></option>
+          <option value="Outros"></option>
+        </datalist>
+      </label>
+
+      <label class="check-row" id="repeat-row">
+        <input type="checkbox" id="f-repetir">
+        <span>
+          <strong>Repetir todo mês</strong>
+          <small>Salário, aluguel, assinaturas… aparecem sozinhos nos próximos meses.</small>
+        </span>
+      </label>
+
+      <div class="sheet-actions">
+        <button class="btn btn-ghost" id="form-cancel">Cancelar</button>
+        <button class="btn btn-primary" id="form-save">Salvar</button>
+      </div>
+      <button class="btn btn-danger-ghost" id="form-delete" hidden>Excluir lançamento</button>
+    </div>
+  </div>
+
+  <!-- ===== Modal: menu ===== -->
+  <div class="overlay" id="overlay-menu" hidden>
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title">Menu</h3>
+      <button class="menu-item" id="menu-export"><span>⬇️</span> Exportar backup (.json)</button>
+      <button class="menu-item" id="menu-import"><span>⬆️</span> Importar backup (.json)</button>
+      <button class="menu-item" id="menu-duplicar"><span>📋</span> Copiar itens do mês anterior</button>
+      <button class="menu-item danger" id="menu-reset"><span>🗑️</span> Apagar todos os dados</button>
+      <input type="file" id="file-import" accept="application/json,.json" hidden>
+      <div class="sheet-actions">
+        <button class="btn btn-ghost" id="menu-close">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Diálogo de recorrência (excluir) ===== -->
+  <div class="overlay" id="overlay-recorrente" hidden>
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title">Item recorrente</h3>
+      <p class="sheet-text" id="recorrente-text">Este item se repete todo mês. O que você quer fazer?</p>
+      <div class="stack">
+        <button class="btn btn-ghost" id="rec-mes">Excluir só deste mês</button>
+        <button class="btn btn-danger-ghost" id="rec-todos">Parar de repetir (todos os meses)</button>
+        <button class="btn btn-ghost" id="rec-cancel">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Toast ===== -->
+  <div class="toast" id="toast" hidden></div>
+
   <script src="js/app.js"></script>
-  <script src="js/visao-geral.js"></script>
 </body>
 </html>
