@@ -15,14 +15,14 @@
 </head>
 <body>
 
-  <!-- ===== Barra do topo ===== -->
+  <!-- ===================== Barra do topo ===================== -->
   <header class="topbar">
     <div class="brand">
       <span class="brand-dot">💰</span>
-      <span class="brand-name">Planejador</span>
+      <span class="brand-name" id="view-title">Planejador</span>
     </div>
 
-    <div class="month-nav">
+    <div class="month-nav" id="month-nav">
       <button class="icon-btn" id="prev-month" aria-label="Mês anterior">‹</button>
       <button class="month-label" id="month-label">—</button>
       <button class="icon-btn" id="next-month" aria-label="Próximo mês">›</button>
@@ -37,68 +37,156 @@
 
   <main class="container">
 
-    <!-- ===== Resumo do mês ===== -->
-    <section class="hero card">
-      <div class="hero-label">Saldo projetado do mês</div>
-      <div class="hero-value" id="saldo-projetado">R$ 0,00</div>
-      <div class="hero-sub" id="saldo-sub">Adicione suas entradas e saídas ✨</div>
+    <!-- ===================================================== -->
+    <!-- ======================= MÊS ========================== -->
+    <!-- ===================================================== -->
+    <section class="view" data-view="mes">
 
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-dot in"></span>
-          <div>
-            <div class="stat-label">A receber</div>
-            <div class="stat-value" id="stat-receber">R$ 0,00</div>
+      <div class="hero card">
+        <div class="hero-top">
+          <div class="hero-label" id="hero-label">Saldo projetado do mês</div>
+          <div class="micro-switch" id="micro-switch" hidden>
+            <button class="ms-opt is-active" data-modo="projetado">Projetado</button>
+            <button class="ms-opt" data-modo="livre">Livre</button>
           </div>
         </div>
-        <div class="stat">
-          <span class="stat-dot out"></span>
-          <div>
-            <div class="stat-label">A pagar</div>
-            <div class="stat-value" id="stat-pagar">R$ 0,00</div>
+        <div class="hero-value" id="saldo-projetado">R$ 0,00</div>
+        <div class="hero-sub" id="saldo-sub">Adicione suas entradas e saídas ✨</div>
+
+        <div class="hero-stats" id="hero-chips">
+          <div class="stat">
+            <span class="stat-dot in"></span>
+            <div>
+              <div class="stat-label">A receber</div>
+              <div class="stat-value" id="stat-receber">R$ 0,00</div>
+            </div>
+          </div>
+          <div class="stat">
+            <span class="stat-dot out"></span>
+            <div>
+              <div class="stat-label">A pagar</div>
+              <div class="stat-value" id="stat-pagar">R$ 0,00</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="progress">
-        <div class="progress-head">
-          <span>Já realizado neste mês</span>
-          <span id="realizado-pct">0%</span>
+        <div class="progress">
+          <div class="progress-head">
+            <span>Já realizado neste mês</span>
+            <span id="realizado-pct">0%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+          <div class="progress-foot" id="realizado-foot">Marque os itens conforme forem acontecendo.</div>
         </div>
-        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-        <div class="progress-foot" id="realizado-foot">Marque os itens conforme forem acontecendo.</div>
+      </div>
+
+      <!-- Faixa "Plano do mês" (só com pct > 0) -->
+      <div class="plano card" id="plano-mes" hidden></div>
+
+      <section class="group">
+        <div class="group-head">
+          <h2><span class="group-ico in">↓</span> Entradas</h2>
+          <span class="group-total in" id="total-entradas">R$ 0,00</span>
+        </div>
+        <div class="list" id="list-entradas"></div>
+      </section>
+
+      <section class="group">
+        <div class="group-head">
+          <h2><span class="group-ico out">↑</span> Saídas</h2>
+          <span class="group-total out" id="total-saidas">R$ 0,00</span>
+        </div>
+        <div class="list" id="list-saidas"></div>
+      </section>
+
+      <!-- Separações do mês (colapsado) -->
+      <details class="sep-box" id="sep-box" hidden>
+        <summary id="sep-summary">Separações do mês</summary>
+        <div class="list" id="list-separacoes"></div>
+      </details>
+
+      <div class="footer-hint">
+        Dados salvos só neste aparelho. Faça um backup pelo menu <strong>☰</strong> de vez em quando.
       </div>
     </section>
 
-    <!-- ===== Entradas ===== -->
-    <section class="group">
-      <div class="group-head">
-        <h2><span class="group-ico in">↓</span> Entradas</h2>
-        <span class="group-total in" id="total-entradas">R$ 0,00</span>
+    <!-- ===================================================== -->
+    <!-- ===================== GUARDAR ======================== -->
+    <!-- ===================================================== -->
+    <section class="view" data-view="guardar" hidden>
+      <div class="hero card">
+        <div class="hero-label">Guardado no total</div>
+        <div class="hero-value" id="g-total">R$ 0,00</div>
+        <div class="hero-sub" id="g-sub">Crie uma carteira pra começar 🐷</div>
       </div>
-      <div class="list" id="list-entradas"></div>
+
+      <div class="card regra" id="card-regra"></div>
+
+      <section class="group">
+        <div class="group-head">
+          <h2><span class="group-ico">🐷</span> Minhas carteiras</h2>
+          <span class="group-total" id="g-count"></span>
+        </div>
+        <div class="list" id="list-carteiras"></div>
+      </section>
     </section>
 
-    <!-- ===== Saídas ===== -->
-    <section class="group">
-      <div class="group-head">
-        <h2><span class="group-ico out">↑</span> Saídas</h2>
-        <span class="group-total out" id="total-saidas">R$ 0,00</span>
+    <!-- ===================================================== -->
+    <!-- ===================== DÍVIDAS ======================== -->
+    <!-- ===================================================== -->
+    <section class="view" data-view="dividas" hidden>
+      <div class="hero card">
+        <div class="hero-label">Você deve</div>
+        <div class="hero-value" id="d-total">R$ 0,00</div>
+        <div class="hero-sub" id="d-sub">Nenhuma dívida 🎉</div>
+        <div class="progress" id="d-progress" hidden>
+          <div class="progress-head">
+            <span>Já pago</span>
+            <span id="d-pct">0%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" id="d-fill"></div></div>
+        </div>
       </div>
-      <div class="list" id="list-saidas"></div>
+
+      <div class="card quitar-card" id="card-quitar" hidden></div>
+      <div class="card acelerar-card" id="card-acelerar" hidden></div>
+
+      <section class="group" id="grupo-dividas" hidden>
+        <div class="group-head">
+          <h2><span class="group-ico out">🧾</span> Minhas dívidas</h2>
+        </div>
+        <div class="list" id="list-dividas"></div>
+      </section>
     </section>
 
-    <div class="footer-hint">
-      Dados salvos só neste aparelho. Faça um backup pelo menu <strong>☰</strong> de vez em quando.
-    </div>
+    <!-- ===================================================== -->
+    <!-- ===================== DESEJOS ======================== -->
+    <!-- ===================================================== -->
+    <section class="view" data-view="desejos" hidden>
+      <div class="desejos-head" id="desejos-head"></div>
+      <div class="grid-desejos" id="grid-desejos"></div>
+    </section>
+
   </main>
 
-  <!-- ===== Botão adicionar ===== -->
-  <button class="fab" id="fab-add" aria-label="Adicionar lançamento">
-    <span class="fab-plus">+</span><span class="fab-text">Adicionar</span>
+  <!-- ===================== FAB ===================== -->
+  <button class="fab" id="fab-add" aria-label="Adicionar">
+    <span class="fab-plus">+</span><span class="fab-text" id="fab-text">Adicionar</span>
   </button>
 
-  <!-- ===== Modal: novo/editar lançamento ===== -->
+  <!-- ===================== Nav inferior ===================== -->
+  <nav class="bottom-nav">
+    <button class="nav-btn is-active" data-view="mes"><span>🗓️</span>Mês</button>
+    <button class="nav-btn" data-view="guardar"><span>🐷</span>Guardar</button>
+    <button class="nav-btn" data-view="dividas"><span>🧾</span>Dívidas</button>
+    <button class="nav-btn" data-view="desejos"><span>✨</span>Desejos</button>
+  </nav>
+
+  <!-- ===================================================== -->
+  <!-- ==================== OVERLAYS ======================== -->
+  <!-- ===================================================== -->
+
+  <!-- Lançamento -->
   <div class="overlay" id="overlay-form" hidden>
     <div class="sheet" role="dialog" aria-modal="true">
       <div class="sheet-handle"></div>
@@ -127,20 +215,12 @@
 
       <label class="field">
         <span class="field-label">Categoria <span class="field-opt">(opcional)</span></span>
-        <input type="text" id="f-categoria" list="categorias" placeholder="Ex.: Casa, Cartão, Assinatura…" autocomplete="off">
+        <input type="text" id="f-categoria" list="categorias" placeholder="Ex.: Casa, Cartão, Mercado…" autocomplete="off">
         <datalist id="categorias">
-          <option value="Salário"></option>
-          <option value="Freela"></option>
-          <option value="Rendimento"></option>
-          <option value="Casa"></option>
-          <option value="Contas"></option>
-          <option value="Cartão"></option>
-          <option value="Mercado"></option>
-          <option value="Transporte"></option>
-          <option value="Assinatura"></option>
-          <option value="Lazer"></option>
-          <option value="Saúde"></option>
-          <option value="Outros"></option>
+          <option value="Salário"></option><option value="Freela"></option><option value="Rendimento"></option>
+          <option value="Casa"></option><option value="Contas"></option><option value="Cartão"></option>
+          <option value="Mercado"></option><option value="Transporte"></option><option value="Assinatura"></option>
+          <option value="Lazer"></option><option value="Saúde"></option><option value="Outros"></option>
         </datalist>
       </label>
 
@@ -160,7 +240,7 @@
     </div>
   </div>
 
-  <!-- ===== Modal: menu ===== -->
+  <!-- Menu -->
   <div class="overlay" id="overlay-menu" hidden>
     <div class="sheet" role="dialog" aria-modal="true">
       <div class="sheet-handle"></div>
@@ -168,6 +248,9 @@
       <button class="menu-item" id="menu-export"><span>⬇️</span> Exportar backup (.json)</button>
       <button class="menu-item" id="menu-import"><span>⬆️</span> Importar backup (.json)</button>
       <button class="menu-item" id="menu-duplicar"><span>📋</span> Copiar itens do mês anterior</button>
+      <button class="menu-item" id="menu-links"><span>🔗</span> <span id="lbl-links">Prévia de links: ligada</span></button>
+      <button class="menu-item" id="menu-sugerir"><span>🐷</span> <span id="lbl-sugerir">Sugerir ao receber: ligado</span></button>
+      <button class="menu-item" id="menu-restaurar"><span>♻️</span> Restaurar backup automático</button>
       <button class="menu-item danger" id="menu-reset"><span>🗑️</span> Apagar todos os dados</button>
       <input type="file" id="file-import" accept="application/json,.json" hidden>
       <div class="sheet-actions">
@@ -176,7 +259,7 @@
     </div>
   </div>
 
-  <!-- ===== Diálogo de recorrência (excluir) ===== -->
+  <!-- Excluir recorrente -->
   <div class="overlay" id="overlay-recorrente" hidden>
     <div class="sheet" role="dialog" aria-modal="true">
       <div class="sheet-handle"></div>
@@ -190,9 +273,230 @@
     </div>
   </div>
 
-  <!-- ===== Toast ===== -->
+  <!-- Carteira -->
+  <div class="overlay" id="overlay-carteira" hidden>
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title" id="carteira-title">Nova carteira</h3>
+
+      <div class="field-row">
+        <label class="field">
+          <span class="field-label">Nome</span>
+          <input type="text" id="c-nome" placeholder="Ex.: Reserva, Viagem…" autocomplete="off">
+        </label>
+        <label class="field field-dia">
+          <span class="field-label">Emoji</span>
+          <input type="text" id="c-emoji" maxlength="4" placeholder="🐷">
+        </label>
+      </div>
+
+      <div class="field-row">
+        <label class="field">
+          <span class="field-label">Já tenho guardado (R$)</span>
+          <input type="text" id="c-inicial" inputmode="decimal" placeholder="0,00" autocomplete="off">
+        </label>
+        <label class="field field-dia">
+          <span class="field-label">% da renda</span>
+          <input type="number" id="c-pct" min="0" max="100" placeholder="0">
+        </label>
+      </div>
+      <div class="field-hint">A <strong>%</strong> é a sua meta: quanto desse dinheiro que entra você quer mandar pra cá. Deixe 0 se não quiser sugestão.</div>
+
+      <label class="field">
+        <span class="field-label">Meta <span class="field-opt">(opcional)</span></span>
+        <input type="text" id="c-meta" inputmode="decimal" placeholder="Ex.: 6.000,00" autocomplete="off">
+      </label>
+
+      <div class="sheet-actions">
+        <button class="btn btn-ghost" id="carteira-cancel">Cancelar</button>
+        <button class="btn btn-primary" id="carteira-save">Salvar</button>
+      </div>
+      <button class="btn btn-danger-ghost" id="carteira-delete" hidden>Excluir carteira</button>
+    </div>
+  </div>
+
+  <!-- Guardar / Retirar -->
+  <div class="overlay" id="overlay-mover" hidden>
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title" id="mover-title">Guardar dinheiro</h3>
+
+      <div class="type-toggle">
+        <button type="button" class="type-opt is-active" data-mover="guardar">🐷 Guardar</button>
+        <button type="button" class="type-opt" data-mover="retirar">↩️ Retirar</button>
+      </div>
+
+      <div class="chips-row" id="mover-carteiras"></div>
+
+      <label class="field">
+        <span class="field-label">Valor (R$)</span>
+        <input type="text" id="m-valor" inputmode="decimal" placeholder="0,00" autocomplete="off">
+      </label>
+
+      <div class="field-hint" id="mover-hint"></div>
+
+      <div class="sheet-actions">
+        <button class="btn btn-ghost" id="mover-cancel">Cancelar</button>
+        <button class="btn btn-primary" id="mover-save">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sugestão (o gatilho) -->
+  <div class="overlay" id="overlay-sugestao" hidden>
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-handle"></div>
+      <div class="sug-icone">💸</div>
+      <h3 class="sheet-title center" id="sug-titulo">Caiu R$ 0,00</h3>
+      <p class="sheet-text center" id="sug-desc"></p>
+
+      <div class="sug-valor" id="sug-valor">R$ 0,00</div>
+      <div class="sug-linhas" id="sug-linhas"></div>
+      <div class="field-hint center" id="sug-rodape"></div>
+
+      <div class="sheet-actions">
+        <button class="btn btn-ghost" id="sug-nao">Agora não</button>
+        <button class="btn btn-primary" id="sug-sim">Separar 🐷</button>
+      </div>
+      <button class="btn btn-link" id="sug-silenciar">Não perguntar mais este mês</button>
+    </div>
+  </div>
+
+  <!-- Dívida -->
+  <div class="overlay" id="overlay-divida" hidden>
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title" id="divida-title">Nova dívida</h3>
+
+      <label class="field">
+        <span class="field-label">O que é / pra quem</span>
+        <input type="text" id="dv-descricao" placeholder="Ex.: Notebook, Cartão Nubank…" autocomplete="off">
+      </label>
+
+      <div class="field-row">
+        <label class="field">
+          <span class="field-label">Valor da parcela (R$)</span>
+          <input type="text" id="dv-valor" inputmode="decimal" placeholder="0,00" autocomplete="off">
+        </label>
+        <label class="field field-dia">
+          <span class="field-label">Dia</span>
+          <input type="number" id="dv-dia" min="1" max="31" placeholder="—">
+        </label>
+      </div>
+
+      <div class="field-row">
+        <label class="field">
+          <span class="field-label">Total de parcelas</span>
+          <input type="number" id="dv-parcelas" min="1" max="480" placeholder="10">
+        </label>
+        <label class="field">
+          <span class="field-label">Estou na parcela</span>
+          <input type="number" id="dv-atual" min="1" max="480" placeholder="1">
+        </label>
+      </div>
+
+      <div class="previa" id="dv-previa">Preencha pra ver a projeção.</div>
+
+      <div class="sheet-actions">
+        <button class="btn btn-ghost" id="divida-cancel">Cancelar</button>
+        <button class="btn btn-primary" id="divida-save">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ações da dívida -->
+  <div class="overlay" id="overlay-divida-acoes" hidden>
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title" id="da-titulo">Dívida</h3>
+      <div class="da-info" id="da-info"></div>
+      <div class="stack">
+        <button class="menu-item" id="da-quitar"><span>⚡</span> Quitar agora</button>
+        <button class="menu-item" id="da-banco"><span>🔒</span> O banco me passou o valor</button>
+        <button class="menu-item" id="da-editar"><span>✏️</span> Editar</button>
+        <button class="menu-item danger" id="da-excluir"><span>🗑️</span> Excluir</button>
+      </div>
+      <div class="sheet-actions">
+        <button class="btn btn-ghost" id="da-fechar">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desejo -->
+  <div class="overlay" id="overlay-desejo" hidden>
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title" id="desejo-title">Novo desejo</h3>
+
+      <label class="field">
+        <span class="field-label">Cole o link aqui 🔗 <span class="field-opt">(opcional)</span></span>
+        <input type="url" id="ds-url" placeholder="https://…" autocomplete="off" inputmode="url">
+      </label>
+      <div class="field-hint" id="ds-status"></div>
+
+      <div class="ds-preview" id="ds-preview" hidden></div>
+
+      <label class="field">
+        <span class="field-label">O que é</span>
+        <input type="text" id="ds-nome" placeholder="Ex.: Cadeira gamer" autocomplete="off">
+      </label>
+
+      <label class="field">
+        <span class="field-label">Preço (R$)</span>
+        <input type="text" id="ds-valor" inputmode="decimal" placeholder="0,00" autocomplete="off">
+      </label>
+
+      <label class="field">
+        <span class="field-label">Juntar na carteira <span class="field-opt">(opcional)</span></span>
+        <select id="ds-carteira"></select>
+      </label>
+
+      <div class="sheet-actions">
+        <button class="btn btn-ghost" id="desejo-cancel">Cancelar</button>
+        <button class="btn btn-primary" id="desejo-save">Salvar</button>
+      </div>
+      <button class="btn btn-danger-ghost" id="desejo-delete" hidden>Excluir desejo</button>
+    </div>
+  </div>
+
+  <!-- Detalhe do desejo -->
+  <div class="overlay" id="overlay-desejo-ver" hidden>
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-handle"></div>
+      <div id="dv-corpo"></div>
+      <div class="stack">
+        <button class="btn btn-primary" id="dv-comprei">Comprei 🎉</button>
+        <button class="btn btn-ghost" id="dv-abrir">Abrir link ↗</button>
+        <button class="btn btn-ghost" id="dv-editar">Editar</button>
+        <button class="btn btn-ghost" id="dv-fechar">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Entrada de valor genérica (caixa hoje / valor do banco) -->
+  <div class="overlay" id="overlay-valor" hidden>
+    <div class="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title" id="vl-titulo">Valor</h3>
+      <p class="sheet-text" id="vl-texto"></p>
+      <label class="field">
+        <span class="field-label" id="vl-label">Valor (R$)</span>
+        <input type="text" id="vl-input" inputmode="decimal" placeholder="0,00" autocomplete="off">
+      </label>
+      <div class="sheet-actions">
+        <button class="btn btn-ghost" id="vl-cancel">Cancelar</button>
+        <button class="btn btn-primary" id="vl-save">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
   <div class="toast" id="toast" hidden></div>
 
   <script src="js/app.js"></script>
+  <script src="js/mes.js"></script>
+  <script src="js/carteiras.js"></script>
+  <script src="js/dividas.js"></script>
+  <script src="js/desejos.js"></script>
 </body>
 </html>

@@ -79,6 +79,57 @@ git push origin main       # deploy automático Vercel
 - [ ] Metas de economia
 - [ ] Se um dia quiser sincronizar de verdade: migrar `localStorage` → Supabase (decisão adiada de propósito)
 
+## 6.1 ⚠️ REGRAS DURAS DA v2 (não quebrar, nunca)
+
+```
+1. 4 ABAS É O TETO. Nenhuma aba nova. Toda feature futura cabe dentro de
+   Mês / Guardar / Dívidas / Desejos, ou é recusada. (O Dindin morreu de 7 telas.)
+
+2. app.js declara TODAS as globais. Os outros .js contêm SOMENTE funções.
+   Nenhum let/const/var em escopo de arquivo fora do app.js (bug c333d62:
+   SyntaxError silencioso que quebra a página inteira).
+   Cada arquivo tem seu próprio 'use strict' (script clássico não herda).
+
+3. Nenhum saldo é armazenado. Carteira, dívida e "livre" são SEMPRE derivados.
+   Uma fonte da verdade por dado.
+
+4. Separação NUNCA entra em entrPrev/saidPrev — guardar não é despesa.
+   Parcela de dívida SEMPRE entra — esse dinheiro sai da conta de verdade.
+   calcular() não muda. livre = saldoProjetado − separadoNoMes.
+
+5. salvar() sempre com try/catch. importar() sempre chama migrar().
+
+6. sw.js: js/ e css/ são servidos REDE-PRIMEIRO (cache só como fallback offline).
+   Ainda assim, bump o CACHE a cada deploy que mude código.
+
+7. O app NÃO dá conselho financeiro. A % é meta DELE (nasce 0).
+   Zero juros, zero CET, zero ranking de qual dívida quitar primeiro.
+
+8. Progressive disclosure: sem dívida, sem carteira e sem pct, a tela Mês é
+   pixel a pixel a de antes. O app só cresce na medida em que ele usa.
+
+9. Desejos: preço SEMPRE digitado à mão (nunca de scraping). Imagem só por URL,
+   nunca base64. Falha do microlink é silenciosa, form continua funcional.
+
+10. Nunca renderizar Infinity/NaN na tela. ritmo <= 0 -> "sem ritmo definido".
+```
+
+## 6.2 Estrutura de arquivos v2
+
+```
+index.html            ← única página, 4 <section class="view">
+css/style.css         ← design system + blocos da v2
+js/app.js             ← ÚNICO com globais: estado, migração, rotas, calcular(), garantirMes()
+js/mes.js             ← aba Mês + o disparo do gatilho no toggleStatus
+js/carteiras.js       ← aba Guardar (carteiras + orçamento) + folha de sugestão
+js/dividas.js         ← aba Dívidas (ehDivida/parcelaNoMes são chamadas pelo app.js)
+js/desejos.js         ← aba Desejos + microlink
+sw.js                 ← rede-primeiro pra código, cache-first pro resto
+```
+
+Blueprint completo com as 24 correções do painel, todas as fórmulas verificadas
+(97 asserções em Node) e as 22 armadilhas: gerado em 2026-08-03, resumido aqui.
+
 ## 7. Deploy/repo
 
 - Deploy: Vercel (mesmo fluxo do Dindin). Confirmar com o Hitalo se mantém o repo `hitalorosa/dindin` ou cria um novo (ex: `planejador`).
