@@ -214,8 +214,79 @@ function dividasEditarCaixa() {
 /* =========================================================
    Render da aba
    ========================================================= */
+/* =========================================================
+   Contas fixas — recorrentes de saída SEM fim (parcelas: null).
+   Não são dívida: não têm saldo devedor nem data de quitação.
+   Mas são compromisso mensal, então moram aqui embaixo das dívidas.
+   ========================================================= */
+function contasFixas() {
+  return db.fixos.filter(function (f) {
+    return f && f.tipo === 'saida' && !ehDivida(f);
+  });
+}
+
+function totalContasFixas() {
+  return r2(contasFixas().reduce(function (s, f) { return s + (f.valor || 0); }, 0));
+}
+
+/* Tudo que sai todo mês sem você decidir: contas fixas + parcelas de dívida. */
+function compromissoMensal() {
+  return r2(totalContasFixas() + alivioMensal());
+}
+
+function renderContasFixas() {
+  var fixas = contasFixas();
+  var grupo = $('#grupo-fixas');
+
+  if (!fixas.length) {
+    grupo.hidden = true;
+    $('#list-fixas').innerHTML = '';
+    $('#card-compromisso').innerHTML = '';
+    return;
+  }
+
+  var totalFixas = totalContasFixas();
+  $('#fixas-total').textContent = dividasMoeda(totalFixas);
+
+  var itens = fixas.slice().sort(function (a, b) {
+    return (a.dia || 99) - (b.dia || 99);
+  });
+
+  $('#list-fixas').innerHTML = itens.map(function (f) {
+    var dia = f.dia
+      ? '<div class="item-day"><span class="d-num">' + f.dia + '</span><span class="d-lbl">dia</span></div>'
+      : '<div class="item-day empty"><span class="d-num">·</span></div>';
+    var tag = f.categoria
+      ? '<div class="item-meta"><span class="item-tag">' + escapar(f.categoria) + '</span></div>'
+      : '';
+    return '<div class="item">' + dia +
+      '<div class="item-main">' +
+        '<div class="item-desc">' + escapar(f.descricao) + '</div>' + tag +
+      '</div>' +
+      '<div class="item-value out">− ' + escapar(moedaCurta(f.valor)) + '</div>' +
+    '</div>';
+  }).join('');
+
+  /* Fecha a conta: o quanto do mês já está comprometido antes de qualquer escolha. */
+  var parcelas = alivioMensal();
+  var total = compromissoMensal();
+  var linhas = '<div class="comp-linha"><span>🔁 Contas fixas</span><b>' + dividasMoeda(totalFixas) + '</b></div>';
+  if (parcelas > 0) {
+    linhas += '<div class="comp-linha"><span>🧾 Parcelas de dívida</span><b>' + dividasMoeda(parcelas) + '</b></div>';
+  }
+  linhas += '<div class="comp-linha total"><span>Comprometido todo mês</span><b>' + dividasMoeda(total) + '</b></div>';
+
+  $('#card-compromisso').innerHTML = linhas +
+    '<div class="aviso-desconto">Sai todo mês sem você precisar decidir nada. ' +
+    'Pra criar ou tirar uma conta fixa, use a aba Mês marcando “repetir todo mês”.</div>';
+
+  grupo.hidden = false;
+}
+
 function renderDividas() {
   var ativas = dividasAtivas();
+
+  renderContasFixas();
 
   /* ---------- Hero ---------- */
   if (!ativas.length) {

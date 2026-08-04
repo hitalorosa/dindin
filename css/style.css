@@ -563,6 +563,20 @@ body { padding-bottom: calc(150px + var(--safe-b)); }
 }
 .da-info { font-size: 13.5px; color: var(--text-2); margin-bottom: 14px; line-height: 1.6; }
 
+/* ---------- Compromisso mensal (contas fixas) ---------- */
+.compromisso { padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.comp-linha {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  font-size: 13.5px; color: var(--text-2);
+}
+.comp-linha b { font-variant-numeric: tabular-nums; color: var(--text); font-weight: 600; }
+.comp-linha.total {
+  border-top: 1px solid var(--border); padding-top: 9px; margin-top: 2px;
+  font-size: 14.5px; color: var(--text); font-weight: 600;
+}
+.comp-linha.total b { font-size: 16px; font-weight: 800; color: var(--out); }
+.compromisso .aviso-desconto { margin-top: 4px; }
+
 /* ---------- Desejos ---------- */
 .desejos-head { display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--text-2); padding: 0 4px; }
 .grid-desejos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
