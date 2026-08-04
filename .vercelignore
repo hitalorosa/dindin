@@ -1,0 +1,7 @@
+# Servidor local de desenvolvimento — não deve ir pro Vercel.
+# Se ele subir, o Vercel tenta tratar o projeto como app Node e o build quebra.
+dev-server.js
+package.json
+.claude/
+CONTEXT.md
+CONTEXT-Dindin.md
