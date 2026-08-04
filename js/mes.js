@@ -63,8 +63,10 @@ function renderMes() {
   var separado = mesSeparado(ym);
   var pctPlano = mesPct();
 
-  /* livre = saldo − o que mudou de bolso. Separação NÃO é despesa. */
-  var livreProj = r2(c.saldoProjetado - separado);
+  /* "Livre pra gastar agora" = dinheiro na mão: o que JÁ caiu, menos o que já
+     paguei, menos o que guardei. NUNCA conta entrada que ainda não recebeu.
+     (saldoReal = entrReal − saidReal; separação não é despesa, só mudou de bolso.) */
+  var livreGastar = r2(c.saldoReal - separado);
 
   /* --------- micro-switch: só existe se houver o que alternar --------- */
   var mostrarSwitch = (separado !== 0 || pctPlano > 0);
@@ -77,16 +79,17 @@ function renderMes() {
 
   /* --------- hero --------- */
   var emLivre = (modoHero === 'livre');
-  var valorHero = emLivre ? livreProj : c.saldoProjetado;
+  var valorHero = emLivre ? livreGastar : c.saldoProjetado;
 
-  $('#hero-label').textContent = emLivre ? 'Livre pra gastar este mês' : 'Saldo projetado do mês';
+  $('#hero-label').textContent = emLivre ? 'Livre pra gastar agora' : 'Projetado do mês';
 
   var hv = $('#saldo-projetado');
   hv.textContent = formatarMoeda(valorHero);
   hv.classList.toggle('pos', valorHero > 0);
   hv.classList.toggle('neg', valorHero < 0);
 
-  /* A sub-linha SEMPRE nomeia o outro número — nenhuma informação some. */
+  /* A sub-linha SEMPRE explica o número atual E mostra o outro — assim fica
+     claro qual é qual, e nenhuma informação some. */
   var sub = $('#saldo-sub');
   if (!mostrarSwitch) {
     if (c.totalPrev === 0) {
@@ -97,11 +100,11 @@ function renderMes() {
       sub.textContent = 'Atenção: previsão de faltar ' + formatarMoeda(Math.abs(c.saldoProjetado)) + '.';
     }
   } else if (emLivre) {
-    sub.textContent = 'Saldo projetado: ' + formatarMoeda(c.saldoProjetado) +
-                      ' · ' + mesFraseSeparado(separado);
+    sub.textContent = 'O que já caiu, menos o que paguei e guardei · ' +
+                      'projetado do mês: ' + formatarMoeda(c.saldoProjetado);
   } else {
-    sub.textContent = 'Livre pra gastar: ' + formatarMoeda(livreProj) +
-                      ' · ' + mesFraseSeparado(separado);
+    sub.textContent = 'Se tudo que você planejou acontecer · ' +
+                      'livre agora: ' + formatarMoeda(livreGastar);
   }
 
   /* --------- chips (2 fixos + até 2 condicionais) --------- */
